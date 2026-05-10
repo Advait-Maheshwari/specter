@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
+html{
+    scroll-behavior: smooth;
+}
+
+
 *{
     margin: 0;
     padding: 0;
@@ -227,4 +232,82 @@ button{
 .card p{
     color: #94a3b8;
     line-height: 1.7;
+}
+
+
+/* MOBILE RESPONSIVE */
+
+@media(max-width: 900px){
+
+    .hero{
+        padding: 20px;
+    }
+
+    nav{
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    nav ul{
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .hero-content{
+        text-align: center;
+        align-items: center;
+    }
+
+    .hero-content h1{
+        font-size: 3rem;
+    }
+
+    .hero-content p{
+        font-size: 1rem;
+    }
+
+    .buttons{
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+
+    button{
+        width: 220px;
+    }
+
+    .features{
+        padding: 80px 20px;
+    }
+
+    .features h2{
+        text-align: center;
+        font-size: 2.2rem;
+    }
+
+}
+
+
+/* VISION */
+
+.vision{
+    padding: 120px 80px;
+
+    text-align: center;
+}
+
+.vision h2{
+    font-size: 3rem;
+    margin-bottom: 30px;
+}
+
+.vision p{
+    max-width: 900px;
+    margin: auto;
+
+    color: #94a3b8;
+
+    line-height: 2;
+    font-size: 1.2rem;
 }

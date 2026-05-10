@@ -3,10 +3,13 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" /><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>SPECTRE</title>
 
     <link rel="stylesheet" href="style.css">
+    
 </head>
 
 <body>
@@ -26,7 +29,7 @@
         </ul>
     </nav>
 
-    <div class="hero-content">
+    <div class="hero-content" data-aos="fade-up">
 
         <span class="tag">
             FUTURE • AI • INNOVATION
@@ -57,23 +60,36 @@
 </section>
 
 
+<section class="vision" data-aos="fade-up">
+
+    <h2>Our Vision</h2>
+
+    <p>
+        SPECTRE aims to redefine the future of digital intelligence
+        by combining AI, futuristic interfaces, automation,
+        and immersive experiences into one ecosystem.
+    </p>
+
+</section>
+
+
 <section class="features">
 
     <h2>Core Features</h2>
 
     <div class="feature-grid">
 
-        <div class="card">
+        <div class="card" data-aos="zoom-in">
             <h3>AI Systems</h3>
             <p>Intelligent futuristic AI experiences.</p>
         </div>
 
-        <div class="card">
+        <div class="card" data-aos="zoom-in">
             <h3>Modern UI</h3>
             <p>Premium futuristic user interfaces.</p>
         </div>
 
-        <div class="card">
+        <div class="card" data-aos="zoom-in">
             <h3>Automation</h3>
             <p>Powerful workflow automation systems.</p>
         </div>
@@ -83,6 +99,15 @@
 </section>
 
 <script src="script.js"></script>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<script>
+    AOS.init({
+        duration: 1000,
+        once: true
+    });
+</script>
 
 </body>
 
