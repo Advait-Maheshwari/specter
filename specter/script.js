@@ -1,124 +1,199 @@
-console.log("SPECTRE EVOLVED");
+/* THEME */
 
-/* LOADER */
+const themeToggle =
+document.getElementById("themeToggle");
 
-window.addEventListener("load", () => {
+let darkMode = true;
 
-    const loader = document.querySelector(".loader");
+themeToggle.addEventListener("click", () => {
 
-    setTimeout(() => {
+    document.body.classList.toggle("light-mode");
 
-        loader.style.opacity = "0";
+    darkMode = !darkMode;
 
-        setTimeout(() => {
-
-            loader.style.display = "none";
-
-        }, 1000);
-
-    }, 1500);
-
+    themeToggle.innerHTML =
+    darkMode ? "🌙" : "☀️";
 });
 
-/* CURSOR GLOW */
+/* SCROLL ANIMATION */
 
-const glow = document.querySelector(".cursor-glow");
+const fadeElements =
+document.querySelectorAll(".fade-up");
+
+const observer =
+new IntersectionObserver((entries) => {
+
+    entries.forEach((entry) => {
+
+        if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+        }
+    });
+});
+
+fadeElements.forEach((el) => {
+    observer.observe(el);
+});
+
+/* CURSOR */
+
+const cursorGlow =
+document.getElementById("cursorGlow");
 
 document.addEventListener("mousemove", (e) => {
 
-    glow.style.left = e.clientX + "px";
-    glow.style.top = e.clientY + "px";
+    cursorGlow.style.left =
+    e.clientX + "px";
 
+    cursorGlow.style.top =
+    e.clientY + "px";
 });
-
-/* SCROLL BAR */
-
-window.addEventListener("scroll", () => {
-
-    const scrollTop = document.documentElement.scrollTop;
-
-    const height =
-    document.documentElement.scrollHeight -
-    document.documentElement.clientHeight;
-
-    const scrollPercent = (scrollTop / height) * 100;
-
-    document.querySelector(".progress-bar").style.width =
-    scrollPercent + "%";
-
-});
-
-/* MOBILE MENU */
-
-const menuToggle = document.querySelector(".menu-toggle");
-const navLinks = document.querySelector(".nav-links");
-
-menuToggle.addEventListener("click", () => {
-
-    navLinks.classList.toggle("active");
-
-});
-
-/* TYPING EFFECT */
-
-const text =
-"SPECTRE creates futuristic AI-powered ecosystems for the next generation.";
-
-const typingElement = document.querySelector(".typing-text");
-
-let index = 0;
-
-function typeText(){
-
-    if(index < text.length){
-
-        typingElement.innerHTML += text.charAt(index);
-
-        index++;
-
-        setTimeout(typeText, 40);
-    }
-
-}
-
-typeText();
 
 /* PARTICLES */
 
-particlesJS("particles-js", {
+const canvas =
+document.getElementById("particles");
 
-    particles: {
+const ctx =
+canvas.getContext("2d");
 
-        number: {
-            value: 90
-        },
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-        color: {
-            value: "#2563eb"
-        },
+const particles = [];
 
-        shape: {
-            type: "circle"
-        },
+for (let i = 0; i < 100; i++) {
 
-        opacity: {
-            value: 0.5
-        },
+    particles.push({
 
-        size: {
-            value: 3
-        },
+        x: Math.random() * canvas.width,
 
-        move: {
-            enable: true,
-            speed: 2
-        },
+        y: Math.random() * canvas.height,
 
-        line_linked: {
-            enable: true,
-            color: "#2563eb",
-            opacity: 0.25
+        radius: Math.random() * 2,
+
+        dx: (Math.random() - 0.5) * 0.5,
+
+        dy: (Math.random() - 0.5) * 0.5
+    });
+}
+
+function animateParticles() {
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    particles.forEach((p) => {
+
+        ctx.beginPath();
+
+        ctx.arc(
+            p.x,
+            p.y,
+            p.radius,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fillStyle =
+        "rgba(56,189,248,0.7)";
+
+        ctx.fill();
+
+        p.x += p.dx;
+        p.y += p.dy;
+
+        if (
+            p.x < 0 ||
+            p.x > canvas.width
+        ) {
+            p.dx *= -1;
         }
-    }
 
+        if (
+            p.y < 0 ||
+            p.y > canvas.height
+        ) {
+            p.dy *= -1;
+        }
+    });
+
+    requestAnimationFrame(
+        animateParticles
+    );
+}
+
+animateParticles();
+
+window.addEventListener("resize", () => {
+
+    canvas.width = window.innerWidth;
+
+    canvas.height = window.innerHeight;
+});
+
+
+const cards =
+document.querySelectorAll(
+".card, .product-card, .dashboard-panel"
+);
+
+cards.forEach((card) => {
+
+    card.addEventListener("mousemove", (e) => {
+
+        const rect =
+        card.getBoundingClientRect();
+
+        const x =
+        e.clientX - rect.left;
+
+        const y =
+        e.clientY - rect.top;
+
+        const centerX =
+        rect.width / 2;
+
+        const centerY =
+        rect.height / 2;
+
+        const rotateX =
+        ((y - centerY) / 20);
+
+        const rotateY =
+        ((centerX - x) / 20);
+
+        card.style.transform =
+        `
+        rotateX(${rotateX}deg)
+        rotateY(${rotateY}deg)
+        translateY(-8px)
+        scale(1.02)
+        `;
+    });
+
+    card.addEventListener("mouseleave", () => {
+
+        card.style.transform =
+        `
+        rotateX(0)
+        rotateY(0)
+        translateY(0)
+        scale(1)
+        `;
+    });
+});
+
+
+window.addEventListener("scroll", () => {
+
+    const scrollY = window.scrollY;
+
+    document.querySelector(".background-glow")
+    .style.transform =
+    `translateY(${scrollY * 0.2}px)`;
 });
