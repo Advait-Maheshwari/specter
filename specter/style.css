@@ -5,25 +5,88 @@
 }
 
 body{
-    background-color: #050816;
-    color: white;
     font-family: Arial, sans-serif;
+    background: #050816;
+    color: white;
+    overflow-x: hidden;
 }
 
-header{
-    height: 100vh;
+.hero{
+    min-height: 100vh;
+    padding: 30px 80px;
+
+    background:
+    radial-gradient(circle at top right, #13203d, transparent 30%),
+    radial-gradient(circle at bottom left, #0a1a35, transparent 30%),
+    #050816;
+}
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo{
+    font-size: 2rem;
+    letter-spacing: 5px;
+}
+
+nav ul{
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+nav a{
+    text-decoration: none;
+    color: white;
+    transition: 0.3s;
+}
+
+nav a:hover{
+    color: #4da3ff;
+}
+
+.hero-content{
+    height: 80vh;
+
     display: flex;
     justify-content: center;
-    align-items: center;
     flex-direction: column;
 }
 
-h1{
+.hero-content h1{
     font-size: 5rem;
-    letter-spacing: 10px;
+    line-height: 1.1;
+    max-width: 800px;
 }
 
-p{
-    margin-top: 10px;
-    color: #8b8b8b;
+.hero-content p{
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: #9ea6b8;
+    max-width: 600px;
+}
+
+button{
+    margin-top: 30px;
+    width: 180px;
+    padding: 15px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #2563eb;
+    color: white;
+
+    font-size: 1rem;
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+button:hover{
+    transform: translateY(-3px);
+    background: #3b82f6;
 }
