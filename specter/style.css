@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 *{
     margin: 0;
     padding: 0;
@@ -5,31 +7,70 @@
 }
 
 body{
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     background: #050816;
     color: white;
     overflow-x: hidden;
 }
 
+/* HERO */
+
 .hero{
+    position: relative;
     min-height: 100vh;
     padding: 30px 80px;
+    overflow: hidden;
 
     background:
-    radial-gradient(circle at top right, #13203d, transparent 30%),
-    radial-gradient(circle at bottom left, #0a1a35, transparent 30%),
+    radial-gradient(circle at top right, #14213d, transparent 30%),
+    radial-gradient(circle at bottom left, #091224, transparent 30%),
     #050816;
 }
 
+/* GLOW */
+
+.background-glow{
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    background: #2563eb;
+
+    filter: blur(180px);
+
+    opacity: 0.25;
+
+    top: -100px;
+    right: -100px;
+
+    z-index: 0;
+}
+
+/* NAVBAR */
+
 nav{
+    position: relative;
+    z-index: 2;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    padding: 20px 30px;
+
+    background: rgba(255,255,255,0.05);
+
+    backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    border-radius: 20px;
 }
 
 .logo{
     font-size: 2rem;
-    letter-spacing: 5px;
+    letter-spacing: 6px;
 }
 
 nav ul{
@@ -45,40 +86,74 @@ nav a{
 }
 
 nav a:hover{
-    color: #4da3ff;
+    color: #60a5fa;
 }
 
+/* HERO CONTENT */
+
 .hero-content{
-    height: 80vh;
+    position: relative;
+    z-index: 2;
+
+    height: 85vh;
 
     display: flex;
     justify-content: center;
     flex-direction: column;
 }
 
+.tag{
+    width: fit-content;
+
+    padding: 10px 20px;
+
+    background: rgba(255,255,255,0.05);
+
+    border: 1px solid rgba(255,255,255,0.1);
+
+    border-radius: 50px;
+
+    font-size: 0.9rem;
+
+    margin-bottom: 25px;
+}
+
 .hero-content h1{
     font-size: 5rem;
     line-height: 1.1;
-    max-width: 800px;
+    max-width: 900px;
+}
+
+.hero-content h1 span{
+    color: #60a5fa;
 }
 
 .hero-content p{
-    margin-top: 20px;
+    margin-top: 25px;
+
+    color: #94a3b8;
+
     font-size: 1.2rem;
-    color: #9ea6b8;
-    max-width: 600px;
+
+    max-width: 700px;
+
+    line-height: 1.8;
+}
+
+/* BUTTONS */
+
+.buttons{
+    display: flex;
+    gap: 20px;
+
+    margin-top: 40px;
 }
 
 button{
-    margin-top: 30px;
-    width: 180px;
-    padding: 15px;
+    padding: 16px 32px;
 
     border: none;
-    border-radius: 10px;
-
-    background: #2563eb;
-    color: white;
+    border-radius: 12px;
 
     font-size: 1rem;
     cursor: pointer;
@@ -86,7 +161,70 @@ button{
     transition: 0.3s;
 }
 
-button:hover{
-    transform: translateY(-3px);
+.primary-btn{
+    background: #2563eb;
+    color: white;
+}
+
+.primary-btn:hover{
+    transform: translateY(-4px);
     background: #3b82f6;
+}
+
+.secondary-btn{
+    background: transparent;
+    color: white;
+
+    border: 1px solid rgba(255,255,255,0.15);
+}
+
+.secondary-btn:hover{
+    background: rgba(255,255,255,0.05);
+}
+
+/* FEATURES */
+
+.features{
+    padding: 100px 80px;
+}
+
+.features h2{
+    font-size: 3rem;
+    margin-bottom: 50px;
+}
+
+.feature-grid{
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+
+    gap: 30px;
+}
+
+.card{
+    padding: 40px;
+
+    background: rgba(255,255,255,0.04);
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    border-radius: 25px;
+
+    transition: 0.3s;
+}
+
+.card:hover{
+    transform: translateY(-8px);
+
+    border-color: #2563eb;
+}
+
+.card h3{
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.card p{
+    color: #94a3b8;
+    line-height: 1.7;
 }
