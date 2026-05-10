@@ -216,6 +216,9 @@ document.getElementById("progress-bar");
 const coreCenter =
 document.querySelector(".core-center");
 
+const energyLevel =
+document.getElementById("energy-level");
+
 /* SYSTEM STATES */
 
 const states = {
@@ -234,7 +237,9 @@ const states = {
             "> Boot sequence started..."
         ],
 
-        progress: "35%"
+        progress: "35%",
+        
+        energy: "25%"
     },
 
     scan: {
@@ -251,7 +256,9 @@ const states = {
             "> No threats detected."
         ],
 
-        progress: "70%"
+        progress: "70%",
+
+        energy: "60%"
     },
 
     sync: {
@@ -268,7 +275,9 @@ const states = {
             "> Ecosystem online."
         ],
 
-        progress: "100%"
+        progress: "100%",
+
+        energy: "85%"
     },
 
     activate: {
@@ -285,7 +294,9 @@ const states = {
             "> Welcome to the future."
         ],
 
-        progress: "100%"
+        progress: "100%",
+
+        energy: "100%"
     }
 
 };
@@ -362,6 +373,41 @@ coreButtons.forEach(button => {
         progressBar.style.width =
         currentState.progress;
 
+
+        /* ENERGY */
+
+    energyLevel.innerText =
+    currentState.energy;
+
+    coreCenter.classList.remove(
+    "low-energy",
+    "medium-energy",
+    "high-energy"
+);
+
+    const energyValue =
+    parseInt(currentState.energy);
+
+    if(energyValue <= 30){
+
+    coreCenter.classList.add(
+    "low-energy");
+
+}
+
+    else if(energyValue <= 80){
+
+    coreCenter.classList.add(
+    "medium-energy");
+
+}
+
+    else{
+
+    coreCenter.classList.add(
+    "high-energy");
+}
+
         /* CORE VISUAL */
 
         coreCenter.className =
@@ -369,5 +415,226 @@ coreButtons.forEach(button => {
         currentState.coreClass;
 
     });
+
+});
+
+
+/* NEURAL NETWORK */
+
+window.addEventListener("load", () => {
+
+    const canvas =
+    document.getElementById("networkCanvas");
+
+    /* STOP IF CANVAS DOESN'T EXIST */
+
+    if(!canvas) return;
+
+    const ctx =
+    canvas.getContext("2d");
+
+    /* CANVAS SIZE */
+
+    canvas.width =
+    canvas.offsetWidth;
+
+    canvas.height =
+    canvas.offsetHeight;
+
+    /* MOUSE */
+
+    const mouse = {
+
+        x: null,
+        y: null,
+        radius: 120
+
+    };
+
+    canvas.addEventListener("mousemove", (e) => {
+
+        const rect =
+        canvas.getBoundingClientRect();
+
+        mouse.x =
+        e.clientX - rect.left;
+
+        mouse.y =
+        e.clientY - rect.top;
+
+    });
+
+    /* PARTICLES */
+
+    const particles = [];
+
+    class Particle{
+
+        constructor(x,y,dx,dy,size){
+
+            this.x = x;
+            this.y = y;
+
+            this.dx = dx;
+            this.dy = dy;
+
+            this.size = size;
+        }
+
+        draw(){
+
+            ctx.beginPath();
+
+            ctx.arc(
+                this.x,
+                this.y,
+                this.size,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fillStyle =
+            "#38bdf8";
+
+            ctx.fill();
+        }
+
+        update(){
+
+            if(
+                this.x > canvas.width ||
+                this.x < 0
+            ){
+                this.dx *= -1;
+            }
+
+            if(
+                this.y > canvas.height ||
+                this.y < 0
+            ){
+                this.dy *= -1;
+            }
+
+            this.x += this.dx;
+            this.y += this.dy;
+
+            /* MOUSE EFFECT */
+
+            const distance =
+            Math.sqrt(
+                (mouse.x - this.x) ** 2 +
+                (mouse.y - this.y) ** 2
+            );
+
+            if(distance < mouse.radius){
+
+                this.size = 5;
+
+            }else{
+
+                this.size = 2;
+            }
+
+            this.draw();
+        }
+
+    }
+
+    /* CREATE PARTICLES */
+
+    for(let i = 0; i < 90; i++){
+
+        particles.push(
+
+            new Particle(
+
+                Math.random() * canvas.width,
+
+                Math.random() * canvas.height,
+
+                (Math.random() - 0.5) * 1.5,
+
+                (Math.random() - 0.5) * 1.5,
+
+                2
+            )
+
+        );
+
+    }
+
+    /* CONNECT PARTICLES */
+
+    function connectParticles(){
+
+        for(let a = 0; a < particles.length; a++){
+
+            for(let b = a; b < particles.length; b++){
+
+                const dx =
+                particles[a].x -
+                particles[b].x;
+
+                const dy =
+                particles[a].y -
+                particles[b].y;
+
+                const distance =
+                Math.sqrt(dx * dx + dy * dy);
+
+                if(distance < 120){
+
+                    ctx.beginPath();
+
+                    ctx.strokeStyle =
+                    "rgba(56,189,248,0.15)";
+
+                    ctx.lineWidth = 1;
+
+                    ctx.moveTo(
+                        particles[a].x,
+                        particles[a].y
+                    );
+
+                    ctx.lineTo(
+                        particles[b].x,
+                        particles[b].y
+                    );
+
+                    ctx.stroke();
+                }
+
+            }
+
+        }
+
+    }
+
+    /* ANIMATION LOOP */
+
+    function animateNetwork(){
+
+        ctx.clearRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+        particles.forEach(particle => {
+
+            particle.update();
+
+        });
+
+        connectParticles();
+
+        requestAnimationFrame(
+            animateNetwork
+        );
+
+    }
+
+    animateNetwork();
 
 });

@@ -1453,3 +1453,129 @@ body.light-mode .theme-btn {
 
     transform: scale(1.03);
 }
+
+
+/* ENERGY STATES */
+
+.core-center.low-energy{
+
+    animation:
+    pulseLow 3s infinite;
+
+}
+
+.core-center.medium-energy{
+
+    animation:
+    pulseMedium 2s infinite;
+
+}
+
+.core-center.high-energy{
+
+    animation:
+    pulseHigh 1.2s infinite;
+
+}
+
+/* LOW */
+
+@keyframes pulseLow{
+
+    0%{
+        transform: scale(1);
+        opacity: 0.7;
+    }
+
+    50%{
+        transform: scale(1.03);
+        opacity: 1;
+    }
+
+    100%{
+        transform: scale(1);
+        opacity: 0.7;
+    }
+
+}
+
+/* MEDIUM */
+
+@keyframes pulseMedium{
+
+    0%{
+        transform: scale(1);
+    }
+
+    50%{
+        transform: scale(1.06);
+    }
+
+    100%{
+        transform: scale(1);
+    }
+
+}
+
+/* HIGH */
+
+@keyframes pulseHigh{
+
+    0%{
+        transform: scale(1);
+    }
+
+    50%{
+        transform: scale(1.1);
+    }
+
+    100%{
+        transform: scale(1);
+    }
+
+}
+
+
+/* NEURAL PLAYGROUND */
+
+.neural-playground{
+
+    padding: 140px 80px;
+
+    text-align: center;
+}
+
+.neural-playground h2{
+
+    font-size: 4rem;
+
+    margin-bottom: 20px;
+}
+
+.neural-playground p{
+
+    color: #94a3b8;
+
+    margin-bottom: 50px;
+
+    font-size: 1.1rem;
+}
+
+/* CANVAS */
+
+#networkCanvas{
+
+    width: 100%;
+
+    height: 600px;
+
+    border-radius: 30px;
+
+    background:
+    rgba(255,255,255,0.03);
+
+    border:
+    1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter: blur(20px);
+}
