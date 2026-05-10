@@ -199,7 +199,7 @@ window.addEventListener("scroll", () => {
 });
 
 
-/* AI CORE INTERACTION */
+/* AI CORE V2 */
 
 const coreButtons =
 document.querySelectorAll(".core-btn");
@@ -210,17 +210,163 @@ document.getElementById("terminal-output");
 const statusText =
 document.getElementById("status-text");
 
+const progressBar =
+document.getElementById("progress-bar");
+
+const coreCenter =
+document.querySelector(".core-center");
+
+/* SYSTEM STATES */
+
+const states = {
+
+    initialize: {
+
+        status: "BOOTING",
+
+        className: "status-booting",
+
+        coreClass: "booting",
+
+        logs: [
+            "> Initializing SPECTRE AI...",
+            "> Loading neural systems...",
+            "> Boot sequence started..."
+        ],
+
+        progress: "35%"
+    },
+
+    scan: {
+
+        status: "SCANNING",
+
+        className: "status-scanning",
+
+        coreClass: "scanning",
+
+        logs: [
+            "> Running deep system scan...",
+            "> Checking automation layers...",
+            "> No threats detected."
+        ],
+
+        progress: "70%"
+    },
+
+    sync: {
+
+        status: "ONLINE",
+
+        className: "status-online",
+
+        coreClass: "online",
+
+        logs: [
+            "> Neural synchronization active...",
+            "> AI connection stabilized...",
+            "> Ecosystem online."
+        ],
+
+        progress: "100%"
+    },
+
+    activate: {
+
+        status: "ONLINE",
+
+        className: "status-online",
+
+        coreClass: "online",
+
+        logs: [
+            "> SPECTRE AI ACTIVATED.",
+            "> Future systems online.",
+            "> Welcome to the future."
+        ],
+
+        progress: "100%"
+    }
+
+};
+
+/* BUTTON EVENTS */
+
 coreButtons.forEach(button => {
 
     button.addEventListener("click", () => {
 
-        const command =
-        button.dataset.command;
+        coreButtons.forEach(btn => {
+            btn.classList.remove("active");
+        });
 
-        terminal.innerHTML +=
-        `<br>> ${command}`;
+        button.classList.add("active");
 
-        statusText.innerHTML = "ONLINE";
+        const action =
+        button.innerText.toLowerCase();
+
+        let currentState;
+
+        if(action.includes("initialize")){
+
+            currentState =
+            states.initialize;
+
+        }
+
+        else if(action.includes("scan")){
+
+            currentState =
+            states.scan;
+
+        }
+
+        else if(action.includes("sync")){
+
+            currentState =
+            states.sync;
+
+        }
+
+        else{
+
+            currentState =
+            states.activate;
+        }
+
+        /* STATUS */
+
+        statusText.innerText =
+        currentState.status;
+
+        statusText.className =
+        currentState.className;
+
+        /* TERMINAL */
+
+        terminal.innerHTML = "";
+
+        currentState.logs.forEach((log, index) => {
+
+            setTimeout(() => {
+
+                terminal.innerHTML +=
+                `<div>${log}</div>`;
+
+            }, index * 600);
+
+        });
+
+        /* PROGRESS */
+
+        progressBar.style.width =
+        currentState.progress;
+
+        /* CORE VISUAL */
+
+        coreCenter.className =
+        "core-center " +
+        currentState.coreClass;
 
     });
 
