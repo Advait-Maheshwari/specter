@@ -1,4 +1,4 @@
-console.log("SPECTRE FULLY ACTIVE");
+console.log("SPECTRE EVOLVED");
 
 /* LOADER */
 
@@ -16,7 +16,7 @@ window.addEventListener("load", () => {
 
         }, 1000);
 
-    }, 2000);
+    }, 1500);
 
 });
 
@@ -31,7 +31,7 @@ document.addEventListener("mousemove", (e) => {
 
 });
 
-/* SCROLL PROGRESS */
+/* SCROLL BAR */
 
 window.addEventListener("scroll", () => {
 
@@ -47,6 +47,41 @@ window.addEventListener("scroll", () => {
     scrollPercent + "%";
 
 });
+
+/* MOBILE MENU */
+
+const menuToggle = document.querySelector(".menu-toggle");
+const navLinks = document.querySelector(".nav-links");
+
+menuToggle.addEventListener("click", () => {
+
+    navLinks.classList.toggle("active");
+
+});
+
+/* TYPING EFFECT */
+
+const text =
+"SPECTRE creates futuristic AI-powered ecosystems for the next generation.";
+
+const typingElement = document.querySelector(".typing-text");
+
+let index = 0;
+
+function typeText(){
+
+    if(index < text.length){
+
+        typingElement.innerHTML += text.charAt(index);
+
+        index++;
+
+        setTimeout(typeText, 40);
+    }
+
+}
+
+typeText();
 
 /* PARTICLES */
 
