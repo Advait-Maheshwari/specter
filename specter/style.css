@@ -1,0 +1,29 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #050816;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+header{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1{
+    font-size: 5rem;
+    letter-spacing: 10px;
+}
+
+p{
+    margin-top: 10px;
+    color: #8b8b8b;
+}
