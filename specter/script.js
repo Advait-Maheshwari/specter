@@ -197,3 +197,31 @@ window.addEventListener("scroll", () => {
     .style.transform =
     `translateY(${scrollY * 0.2}px)`;
 });
+
+
+/* AI CORE INTERACTION */
+
+const coreButtons =
+document.querySelectorAll(".core-btn");
+
+const terminal =
+document.getElementById("terminal-output");
+
+const statusText =
+document.getElementById("status-text");
+
+coreButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        const command =
+        button.dataset.command;
+
+        terminal.innerHTML +=
+        `<br>> ${command}`;
+
+        statusText.innerHTML = "ONLINE";
+
+    });
+
+});
